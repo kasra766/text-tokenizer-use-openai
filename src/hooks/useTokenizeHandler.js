@@ -5,7 +5,7 @@ import {
   tokenizer,
 } from "../util";
 
-export function useHandlers(ref) {
+export function useTokenizeHandler(ref) {
   const [textWithoutStopWords, setTextWithoutStopWords] = useState("");
   const [encodeTokens, setEncodedTokens] = useState(null);
   const [encodeWithoutStopWords, setEncodeTextWithoutStopWords] =

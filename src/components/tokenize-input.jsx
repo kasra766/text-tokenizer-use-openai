@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { useHandlers } from "../hooks/useHandlers";
+import { useTokenizeHandler } from "../hooks/useTokenizeHandler";
 
 export const TokenizeInput = forwardRef(function (props, ref) {
   const {
@@ -9,7 +9,7 @@ export const TokenizeInput = forwardRef(function (props, ref) {
     encodeTokens: encodeTokensBpe,
     encodeWithoutStopWords,
     selectedEncoding,
-  } = useHandlers(ref);
+  } = useTokenizeHandler(ref);
 
   const selectEncoding = (
     <div>
@@ -32,7 +32,13 @@ export const TokenizeInput = forwardRef(function (props, ref) {
   return (
     <form onSubmit={onsubmitHandler}>
       {selectEncoding}
-      <textarea cols={50} rows={10} placeholder="write you text" type="text" ref={ref} />
+      <textarea
+        cols={50}
+        rows={10}
+        placeholder="write you text"
+        type="text"
+        ref={ref}
+      />
       {encodeTokensBpe && (
         <>
           <p>encodedTokens BPE: {JSON.stringify(encodeTokensBpe)}</p>

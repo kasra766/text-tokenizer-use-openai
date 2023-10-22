@@ -1,2 +1,2 @@
-export {TokenizeInput} from "./tokenize-input"
-export {ChatGpt} from "./chatgpt"
+export { TokenizeInput } from "./tokenize-input";
+export { OpenAi } from "./openAi";

@@ -1,9 +1,9 @@
 import { forwardRef } from "react";
-import { useChatGptHandler } from "../hooks/useChatGptHandler";
+import { useOpenAiHandler } from "../hooks/useOpenAIHandler";
 
 
-export const ChatGpt = forwardRef(function (props, ref) {
-  const [data, handleSubmit] = useChatGptHandler(ref);
+export const OpenAi = forwardRef(function (props, ref) {
+  const [data, handleSubmit] = useOpenAiHandler(ref);
 
   return (
     <div>

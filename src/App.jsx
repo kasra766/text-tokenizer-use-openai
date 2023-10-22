@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ChatGpt, TokenizeInput } from "./components";
+import { TokenizeInput,OpenAi } from "./components";
 
 import "./App.css";
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <TokenizeInput ref={ref} />
-      <ChatGpt ref={ref} />
+      <OpenAi ref={ref} />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import OpenAI from "openai";
 import { useState } from "react";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const openAi = new OpenAI({
   apiKey: API_KEY,
   dangerouslyAllowBrowser: true,
 });
-export function useChatGptHandler(ref) {
+export function useOpenAiHandler(ref) {
   const [data, setData] = useState(null);
 
   async function handleSubmit() {

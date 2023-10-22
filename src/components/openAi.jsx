@@ -7,7 +7,6 @@ export const OpenAi = forwardRef(function (props, ref) {
 
   return (
     <div>
-      <h3>chatGpt answer:</h3>
       <button type="button" onClick={handleSubmit} disabled={loading}>
         fetch response form openAi
       </button>

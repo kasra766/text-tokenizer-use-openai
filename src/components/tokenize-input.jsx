@@ -35,7 +35,7 @@ export const TokenizeInput = forwardRef(function (props, ref) {
       <textarea
         cols={50}
         rows={10}
-        placeholder="write you text"
+        placeholder="write your text"
         type="text"
         ref={ref}
       />
@@ -58,7 +58,7 @@ export const TokenizeInput = forwardRef(function (props, ref) {
         </>
       )}
       <button type="submit" style={{ display: "block", margin: "10px auto" }}>
-        submit
+        tokenize
       </button>
     </form>
   );

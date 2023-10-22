@@ -1,15 +1,20 @@
 import { forwardRef } from "react";
 import { useOpenAiHandler } from "../hooks/useOpenAIHandler";
 
-
 export const OpenAi = forwardRef(function (props, ref) {
-  const [data, handleSubmit] = useOpenAiHandler(ref);
+  const { data, loading, handleSubmit, handleSubmitStream } =
+    useOpenAiHandler(ref);
 
   return (
     <div>
       <h3>chatGpt answer:</h3>
-      <button type="button" onClick={handleSubmit}>send to chatGpt</button>
-      <p>{data}</p>
+      <button type="button" onClick={handleSubmit} disabled={loading}>
+        fetch response form openAi
+      </button>
+      <button type="button" onClick={handleSubmitStream} disabled={loading}>
+        fetch stream response form openAi
+      </button>
+      {loading ? <p>loading...</p> : <p>{data}</p>}
     </div>
   );
 });

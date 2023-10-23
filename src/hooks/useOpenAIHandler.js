@@ -10,7 +10,7 @@ export function useOpenAiHandler(ref) {
 
   const controller = new AbortController();
   const { signal } = controller;
-  let stop = false;
+ 
 
   useEffect(() => {
     return () => {
@@ -26,12 +26,10 @@ export function useOpenAiHandler(ref) {
   }
   function onMessage(data) {
     setLoading(false);
-    if (!stop) {
+
+    if (data !== "[DONE]") {
       const parseData = JSON.parse(data);
       setData((prev) => `${prev}${parseData.choices[0]?.delta?.content || ""}`);
-      if (parseData.finish_reason === "stop") {
-        stop = true;
-      }
     }
   }
 
@@ -41,7 +39,7 @@ export function useOpenAiHandler(ref) {
       ref.current.focus();
       return;
     }
-    stop = false;
+   
     setData("");
 
     const bodyOfFetchSSE = {

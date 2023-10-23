@@ -1,9 +1,7 @@
 import { stopWordRemovers } from "./stop-words-remover";
 import { tokenizer } from "./tokenizer";
 
-export function encodeTextWithoutStopWords(text, selectedEncoding) {
+export function encodeTextWithoutStopWords(text) {
   const filterText = stopWordRemovers(text);
-  const encodeTokens = tokenizer(filterText, selectedEncoding);
-
-  return encodeTokens;
+  return tokenizer(filterText);
 }

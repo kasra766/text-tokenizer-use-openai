@@ -23,10 +23,10 @@ export function useOpenAiHandler(ref) {
         model: "gpt-3.5-turbo",
         max_tokens: 100,
         messages: [{ role: "user", content: prompt }],
-        n: 1,
+        n: 2,
         stop: "\n",
       });
-
+      console.log(response);
       setData(response.choices[0].message.content);
       ref.current.value = "";
     } catch (err) {
@@ -55,7 +55,8 @@ export function useOpenAiHandler(ref) {
       });
       setLoading(false);
       for await (const part of response) {
-        setData((prev) => `${prev}  ${part.choices[0]?.delta?.content || ""}`);
+        console.log(part);
+        setData((prev) => `${prev}${part.choices[0]?.delta?.content || ""}`);
       }
       ref.current.value = "";
     } catch (err) {

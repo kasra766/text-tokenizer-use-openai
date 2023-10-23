@@ -7,10 +7,9 @@ const AI_URL = import.meta.env.VITE_AI_URL;
 export function useOpenAiHandler(ref) {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState(false);
   const controller = new AbortController();
   const { signal } = controller;
- 
 
   useEffect(() => {
     return () => {
@@ -20,9 +19,11 @@ export function useOpenAiHandler(ref) {
 
   function abortRequest() {
     controller.abort();
+    setLoading(false);
   }
   function onError(err) {
-    throw new Error(err);
+    console.error(err);
+    setError(true);
   }
   function onMessage(data) {
     setLoading(false);
@@ -39,8 +40,6 @@ export function useOpenAiHandler(ref) {
       ref.current.focus();
       return;
     }
-   
-    setData("");
 
     const bodyOfFetchSSE = {
       model: "gpt-3.5-turbo",
@@ -63,12 +62,15 @@ export function useOpenAiHandler(ref) {
     };
 
     try {
+      setError(false);
+      setData("");
       setLoading(true);
       await fetchSSE(AI_URL, fetchOption);
+      ref.current.value = "";
     } catch (err) {
       console.error(err);
     }
   }
 
-  return { data, loading, handleSubmit, abortRequest };
+  return { data, loading, error, handleSubmit, abortRequest };
 }

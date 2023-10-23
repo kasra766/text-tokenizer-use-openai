@@ -4,7 +4,7 @@ import {
   stopWordRemovers,
   tokenizer,
   spaceRemover,
-} from "../util";
+} from "../utils";
 
 export function useTokenizeHandler(ref) {
   const [textWithoutStopWords, setTextWithoutStopWords] = useState("");

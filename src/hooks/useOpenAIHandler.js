@@ -7,9 +7,10 @@ const AI_URL = import.meta.env.VITE_AI_URL;
 export function useOpenAiHandler(ref) {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
-  const [stop, setStop] = useState(false);
+
   const controller = new AbortController();
   const { signal } = controller;
+  let stop = false;
 
   useEffect(() => {
     return () => {
@@ -29,7 +30,7 @@ export function useOpenAiHandler(ref) {
       const parseData = JSON.parse(data);
       setData((prev) => `${prev}${parseData.choices[0]?.delta?.content || ""}`);
       if (parseData.finish_reason === "stop") {
-        setStop(true);
+        stop = true;
       }
     }
   }
@@ -40,8 +41,9 @@ export function useOpenAiHandler(ref) {
       ref.current.focus();
       return;
     }
+    stop = false;
     setData("");
-    setStop(false);
+
     const bodyOfFetchSSE = {
       model: "gpt-3.5-turbo",
       max_tokens: 100,

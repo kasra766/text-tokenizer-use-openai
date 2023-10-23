@@ -16,23 +16,15 @@ export function useTokenizeHandler(ref) {
     encodeFilterText: null,
     encodedModelsFilterText: "",
   });
-  // const [selectedEncoding, setSelectEncoding] = useState("cl100k_base");
 
-  // handle select encode type
-  // const handleChange = (e) => {
-  //   const text = ref.current.value;
-  //   setSelectEncoding(e.target.value);
-  //   tokenizeHandler(text, e.target.value);
-  // };
-
-  const onsubmitHandler = (e) => {
+  function onsubmitHandler(e) {
     e.preventDefault();
     const text = ref.current.value;
     const filterText = spaceRemover(text);
     tokenizeHandler(filterText);
-  };
+  }
 
-  const tokenizeHandler = (text) => {
+  function tokenizeHandler(text) {
     //bpe
 
     const { encode, encodeModel } = tokenizer(text);
@@ -44,13 +36,11 @@ export function useTokenizeHandler(ref) {
       encodeFilterText,
       encodedModelsFilterText,
     });
-  };
+  }
   return {
-    // handleChange,
     onsubmitHandler,
     textWithoutStopWords,
     encodeWithoutStopWords,
-    // selectedEncoding,
     ...encodeTokens,
     ...encodeWithoutStopWords,
   };
